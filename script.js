@@ -116,6 +116,17 @@ async function takeCommand(message) {
         const date = new Date().toLocaleString(undefined, { day: "numeric", month: "short" });
         const response = `Today's date is ${date}`;
         displayAndSpeakResponse(response);
+    } else if (message.includes("search") || message.includes("look up")) {
+        const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
+        if (query) {
+            const response = `Searching Google for: ${query}`;
+            displayAndSpeakResponse(response);
+            const googleSearchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            window.open(googleSearchURL, "_blank");
+        } else {
+            const response = "Please specify what you would like me to search for.";
+            displayAndSpeakResponse(response);
+        }
     } else {
         const response = "Let me find the best answer for you...";
         displayAndSpeakResponse(response);
