@@ -117,9 +117,9 @@ async function takeCommand(message) {
         const response = `Today's date is ${date}`;
         displayAndSpeakResponse(response);
     } else if (message.includes("search") || message.includes("look up")) {
-        const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
+        const query = message.replace(/search|open |for/gi, "").trim(); // Extract search keywords
         if (query) {
-            const response = `Searching Google for: ${query}`;
+            const response = `Searching : ${query}`;
             displayAndSpeakResponse(response);
             const googleSearchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
             window.open(googleSearchURL, "_blank");
