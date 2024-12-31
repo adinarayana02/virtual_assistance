@@ -25,21 +25,6 @@
     <footer>
         <p>&copy; 2024 Adinarayana Thota. All rights reserved.</p>
     </footer>
-    <script>
-        const responseOutput = document.getElementById('response-output');
-
-        function setResponseOutput(content) {
-            responseOutput.value = content;
-            responseOutput.style.height = 'auto'; // Reset height
-            responseOutput.style.height = responseOutput.scrollHeight + 'px'; // Set height based on content
-        }
-
-        // Example usage: simulate setting the response dynamically
-        document.getElementById('btn').addEventListener('click', () => {
-            setResponseOutput("This is a dynamically generated response that adjusts its height based on the content. Try adding more text and see how it grows!");
-        });
-    </script>
-
 
     <script src="script.js"></script>
 </body>
