@@ -11,7 +11,7 @@ function speak(text) {
     text_speak.rate = 1;
     text_speak.pitch = 1;
     text_speak.volume = 1;
-    text_speak.lang = "en-US";
+    text_speak.lang = "hi-GB";
     window.speechSynthesis.speak(text_speak);
 }
 
@@ -60,7 +60,7 @@ async function generateResponse(prompt) {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${API_KEY}`,
+                "Authorization": Bearer ${API_KEY},
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -104,30 +104,21 @@ async function takeCommand(message) {
         const response = "Opening Google...";
         displayAndSpeakResponse(response);
         window.open("https://google.com/", "_blank");
+   
+        displayAndSpeakResponse(response);
     } else if (message.includes("search") || message.includes("look up")) {
-        const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
+        const query = message.replace(/search|open |for/gi, "").trim(); // Extract search keywords
         if (query) {
-            const response = `Searching for: ${query}`;
+            const response = Searching : ${query};
             displayAndSpeakResponse(response);
-            const googleSearchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+            const googleSearchURL = https://www.google.com/search?q=${encodeURIComponent(query)};
             window.open(googleSearchURL, "_blank");
         } else {
             const response = "Please specify what you would like me to search for.";
             displayAndSpeakResponse(response);
         }
-    } else if (message.includes("search youtube") || message.includes("find on youtube")) {
-        const query = message.replace(/search youtube|find on youtube|for/gi, "").trim(); // Extract YouTube search keywords
-        if (query) {
-            const response = `Searching YouTube for: ${query}`;
-            displayAndSpeakResponse(response);
-            const youtubeSearchURL = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
-            window.open(youtubeSearchURL, "_blank");
-        } else {
-            const response = "Please specify what you would like me to search for on YouTube.";
-            displayAndSpeakResponse(response);
-        }
     } else {
-        const response = "Here is an answer for you...";
+        const response = "Here is answer for you...";
         displayAndSpeakResponse(response);
         const generatedResponse = await generateResponse(message);
         displayAndSpeakResponse(generatedResponse);
