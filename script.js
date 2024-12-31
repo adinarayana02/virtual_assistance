@@ -116,8 +116,8 @@ async function takeCommand(message) {
         const date = new Date().toLocaleString(undefined, { day: "numeric", month: "short" });
         const response = Today's date is ${date};
         displayAndSpeakResponse(response);
-    } else if (message.includes("search") || message.includes("look up")) {
-        const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
+    } else if (message.includes("search") || message.includes("open")) {
+        const query = message.replace(/search|open|for/gi, "").trim(); // Extract search keywords
         if (query) {
             const response = Searching Google for: ${query};
             displayAndSpeakResponse(response);
