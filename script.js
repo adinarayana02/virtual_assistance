@@ -106,7 +106,7 @@ async function takeCommand(message) {
         window.open("https://google.com/", "_blank");
    
         displayAndSpeakResponse(response);
-    } else if (message.includes("search || open ") || message.includes("look up")) {
+    } else if (message.includes("search") || message.includes("look up")) {
         const query = message.replace(/search|open |for/gi, "").trim(); // Extract search keywords
         if (query) {
             const response = `Searching : ${query}`;
@@ -118,7 +118,7 @@ async function takeCommand(message) {
             displayAndSpeakResponse(response);
         }
     } else {
-        const response = "Let me find the best answer for you...";
+        const response = "Here is answer for you...";
         displayAndSpeakResponse(response);
         const generatedResponse = await generateResponse(message);
         displayAndSpeakResponse(generatedResponse);
