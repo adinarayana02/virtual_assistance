@@ -16,9 +16,9 @@ body {
     padding: 20px;
 }
 #logo {
-    width: 15vw;
-    max-width: 120px;
-    min-width: 80px;
+    width: 20vw;
+    max-width: 150px;
+    min-width: 100px;
 }
 h1 {
     color: aliceblue;
