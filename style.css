@@ -70,35 +70,39 @@ h1 {
     text-align: center;
     color: aliceblue;
     font-family: "Protest Guerrilla", sans-serif;
-    padding: 15px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0px 0px 20px rgb(21, 145, 207), 0px 0px 20px rgb(201, 41, 116);
     box-sizing: border-box;
 }
 #response-container h3 {
     font-size: 20px;
     color: rgb(212, 43, 122);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
 }
 #response-output {
     width: 100%;
-    max-width: 400px;
-    height: 150px;
+    max-width: 450px;
+    height: 180px;
     margin: 0 auto;
     display: block;
-    font-size: 16px;
-    padding: 15px;
+    font-size: 18px;
+    padding: 20px;
     border: 2px solid rgb(21, 145, 207);
     border-radius: 15px;
     background-color: black;
     color: aliceblue;
     resize: none;
     outline: none;
-    box-shadow: 0px 0px 10px rgb(21, 145, 207), 0px 0px 10px rgb(201, 41, 116);
-    transition: box-shadow 0.3s ease;
+    box-shadow: 0px 0px 15px rgb(21, 145, 207), 0px 0px 15px rgb(201, 41, 116);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 #response-output:focus {
-    box-shadow: 0px 0px 20px rgb(21, 145, 207), 0px 0px 20px rgb(201, 41, 116);
+    box-shadow: 0px 0px 25px rgb(21, 145, 207), 0px 0px 25px rgb(201, 41, 116);
+    transform: scale(1.02);
 }
-/* Highlighting animation for the response text */
 #response-output.highlight {
     animation: highlight 1s infinite alternate;
 }
@@ -128,8 +132,8 @@ h1 {
         font-size: 14px;
     }
     #response-output {
-        font-size: 14px;
-        height: 120px;
+        font-size: 16px;
+        height: 160px;
     }
 }
 @media (max-width: 480px) {
@@ -144,7 +148,7 @@ h1 {
         font-size: 12px;
     }
     #response-output {
-        font-size: 12px;
-        height: 100px;
+        font-size: 14px;
+        height: 140px;
     }
 }
