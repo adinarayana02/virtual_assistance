@@ -94,7 +94,7 @@ async function takeCommand(message) {
         const response = "Hello sir, what can I help you with?";
         displayAndSpeakResponse(response);
     } else if (message.includes("who are you")) {
-        const response = "I am your virtual assistant, created by Ayush Sir.";
+        const response = "I am your virtual assistant, created by Adinarayana.";
         displayAndSpeakResponse(response);
     } else if (message.includes("open youtube")) {
         const response = "Opening YouTube...";
