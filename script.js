@@ -15,6 +15,10 @@ function speak(text) {
     window.speechSynthesis.speak(text_speak);
 }
 
+function stopSpeaking() {
+    window.speechSynthesis.cancel(); // Stop any ongoing speech synthesis
+}
+
 function wishMe() {
     let day = new Date();
     let hours = day.getHours();
@@ -39,10 +43,17 @@ recognition.onresult = (event) => {
 };
 
 btn.addEventListener("click", () => {
+    stopSpeaking(); // Stop any ongoing speech synthesis
+    resetApp(); // Reset the application state
     recognition.start();
     voice.style.display = "block";
     btn.style.display = "none";
 });
+
+function resetApp() {
+    content.innerText = ""; // Clear the displayed transcript
+    responseOutput.value = ""; // Clear the response output
+}
 
 async function generateResponse(prompt) {
     try {
@@ -117,3 +128,8 @@ function displayAndSpeakResponse(response) {
     responseOutput.value = response; // Update the text area with the response
     speak(response); // Speak the response
 }
+
+// Stop speech synthesis when the page is refreshed
+window.addEventListener("beforeunload", () => {
+    stopSpeaking();
+});
