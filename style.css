@@ -80,60 +80,21 @@ h1 {
 }
 #response-output {
     width: 100%;
-    max-width: 500px; /* Increase max width for larger screens */
-    min-width: 300px; /* Ensure a good width on smaller devices */
-    min-height: 50px; /* Start with a small height for compact responses */
-    max-height: 400px; /* Limit maximum height for very long responses */
+    max-width: 400px;
+    height: 300px;
     margin: 0 auto;
     display: block;
     font-size: 16px;
-    line-height: 1.5; /* Improve text readability */
     padding: 15px;
     border: 2px solid rgb(21, 145, 207);
     border-radius: 15px;
-    background-color: #000; /* Consistent dark theme */
+    background-color: black;
     color: aliceblue;
-    resize: none; /* Prevent manual resizing */
+    resize: none;
     outline: none;
-    overflow-y: auto; /* Enable scrolling for very long content */
     box-shadow: 0px 0px 10px rgb(21, 145, 207), 0px 0px 10px rgb(201, 41, 116);
-    transition: box-shadow 0.3s ease, height 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
-
-/* Adjust height dynamically for better responsiveness */
-#response-output:focus {
-    box-shadow: 0px 0px 20px rgb(21, 145, 207), 0px 0px 20px rgb(201, 41, 116);
-}
-
-/* Responsive Design for Various Devices */
-
-/* Phones (max-width: 480px) */
-@media (max-width: 480px) {
-    #response-output {
-        font-size: 14px; /* Slightly smaller font for small screens */
-        max-width: 90%; /* Use more screen width */
-        min-height: 100px; /* Larger starting height for usability */
-    }
-}
-
-/* Tablets (max-width: 768px) */
-@media (max-width: 768px) {
-    #response-output {
-        font-size: 15px; /* Balance between small and large screens */
-        max-width: 95%; /* Almost full width of the screen */
-        min-height: 120px; /* Adjust starting height */
-    }
-}
-
-/* Laptops and Desktops (min-width: 1024px) */
-@media (min-width: 1024px) {
-    #response-output {
-        font-size: 16px; /* Default font size */
-        max-width: 600px; /* Wider for larger screens */
-        min-height: 150px; /* Larger starting height for desktop */
-    }
-}
-
 #response-output:focus {
     box-shadow: 0px 0px 20px rgb(21, 145, 207), 0px 0px 20px rgb(201, 41, 116);
 }
