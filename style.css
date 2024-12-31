@@ -81,8 +81,7 @@ h1 {
 #response-output {
     width: 100%;
     max-width: 400px;
-    min-height: 50px; /* Minimum height */
-    overflow-y: hidden; /* Prevent scrollbars */
+    height: 150px;
     margin: 0 auto;
     display: block;
     font-size: 16px;
@@ -94,9 +93,8 @@ h1 {
     resize: none;
     outline: none;
     box-shadow: 0px 0px 10px rgb(21, 145, 207), 0px 0px 10px rgb(201, 41, 116);
-    transition: box-shadow 0.3s ease, height 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
-
 #response-output:focus {
     box-shadow: 0px 0px 20px rgb(21, 145, 207), 0px 0px 20px rgb(201, 41, 116);
 }
