@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     width: 100%;
     height: 100%;
@@ -15,11 +16,13 @@ body {
     flex-direction: column;
     padding: 20px;
 }
+
 #logo {
     width: 20vw;
     max-width: 150px;
     min-width: 100px;
 }
+
 h1 {
     color: aliceblue;
     font-family: "Protest Guerrilla", sans-serif;
@@ -28,20 +31,24 @@ h1 {
     max-font-size: 35px;
     min-font-size: 20px;
 }
+
 #name {
     color: rgb(212, 43, 122);
     font-size: 6vw;
     max-font-size: 40px;
 }
+
 #va {
     color: rgb(43, 206, 212);
     font-size: 5vw;
     max-font-size: 25px;
 }
+
 #voice {
     width: 80px;
     display: none;
 }
+
 #btn {
     width: 80%;
     max-width: 300px;
@@ -60,10 +67,12 @@ h1 {
     transition: all 0.5s;
     cursor: pointer;
 }
+
 #btn:hover {
     box-shadow: 2px 2px 20px rgb(21, 145, 207), 2px 2px 20px rgb(201, 41, 116);
     letter-spacing: 2px;
 }
+
 #response-container {
     width: 90%;
     margin-top: 20px;
@@ -73,18 +82,21 @@ h1 {
     padding: 15px;
     box-sizing: border-box;
 }
+
 #response-container h3 {
     font-size: 20px;
     color: rgb(212, 43, 122);
     margin-bottom: 10px;
 }
+
 #response-output {
     width: 100%;
-    max-width: 400px;
-    height: 300px;
+    max-width: 90%;
+    height: 40vh;
     margin: 0 auto;
     display: block;
-    font-size: 16px;
+    font-size: 18px; /* Slightly larger font size for readability */
+    line-height: 1.6; /* Adjust line spacing for a cleaner look */
     padding: 15px;
     border: 2px solid rgb(21, 145, 207);
     border-radius: 15px;
@@ -94,14 +106,39 @@ h1 {
     outline: none;
     box-shadow: 0px 0px 10px rgb(21, 145, 207), 0px 0px 10px rgb(201, 41, 116);
     transition: box-shadow 0.3s ease;
+    overflow-y: auto;
+    white-space: pre-wrap; /* Ensures formatting of the text is maintained */
+    word-wrap: break-word; /* Ensures long words break into the next line */
+    
+    /* Premium font family */
+    font-family: 'Poppins', sans-serif; /* Elegant and modern font */
+    font-weight: 400; /* Regular weight for readability */
+    letter-spacing: 0.5px; /* Adds a bit of spacing between characters for a more open feel */
 }
+
+@media (max-width: 768px) {
+    #response-output {
+        font-size: 14px;
+        height: 30vh; /* Reduced height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #response-output {
+        font-size: 12px;
+        height: 25vh; /* Further reduced height for very small screens */
+    }
+}
+
 #response-output:focus {
     box-shadow: 0px 0px 20px rgb(21, 145, 207), 0px 0px 20px rgb(201, 41, 116);
 }
+
 /* Highlighting animation for the response text */
 #response-output.highlight {
     animation: highlight 1s infinite alternate;
 }
+
 @keyframes highlight {
     from {
         background-color: rgba(255, 255, 0, 0.2);
@@ -116,50 +153,76 @@ h1 {
     body {
         gap: 20px;
     }
+
     #logo {
         width: 25vw;
     }
+
     h1 {
         font-size: 4vw;
         text-align: center;
     }
+
     #btn {
         width: 90%;
         font-size: 14px;
     }
+
     #response-output {
         font-size: 14px;
         height: 120px;
     }
 }
+
 @media (max-width: 480px) {
     #logo {
         width: 30vw;
     }
+
     h1 {
         font-size: 5vw;
     }
+
     #btn {
         width: 100%;
         font-size: 12px;
     }
-    /* Footer Styles */
-footer {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 15px 0;
-    color: aliceblue;
-    text-align: center;
-    position: absolute;
-    bottom: 0;
-}
 
-footer p {
-    margin: 0;
-    font-size: 14px;
-}
+    /* Footer Styles */
+    footer {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 15px 0;
+        color: aliceblue;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+    }
+
+    footer p {
+        margin: 0;
+        font-size: 14px;
+    }
+
     #response-output {
         font-size: 12px;
         height: 100px;
     }
+}
+
+/* Add styles for highlighting individual words */
+.highlighted-word {
+    background-color: rgba(255, 255, 0, 0.5);
+    color: yellow;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#response-output span {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#response-output span.highlight {
+    background-color: #ffff00; /* Yellow background for highlighting */
 }
