@@ -12,11 +12,41 @@ function speak(text) {
     text_speak.pitch = 1;
     text_speak.volume = 1;
     text_speak.lang = "hi-GB";
+
+    const words = text.split(" "); // Split text into words
+    let wordIndex = 0;
+
+    // Highlight words as they are spoken
+    text_speak.onboundary = (event) => {
+        if (event.name === "word") {
+            highlightWord(words, wordIndex);
+            wordIndex++;
+        }
+    };
+
+    text_speak.onend = () => {
+        clearHighlight(); // Clear highlights after speech ends
+    };
+
     window.speechSynthesis.speak(text_speak);
 }
 
 function stopSpeaking() {
     window.speechSynthesis.cancel(); // Stop any ongoing speech synthesis
+}
+
+function highlightWord(words, index) {
+    const highlightedText = words.map((word, i) => {
+        if (i === index) {
+            return `<span style="background-color: yellow;">${word}</span>`;
+        }
+        return word;
+    }).join(" ");
+    responseOutput.innerHTML = highlightedText; // Update displayed text with highlighted word
+}
+
+function clearHighlight() {
+    responseOutput.innerHTML = responseOutput.innerText; // Remove highlight
 }
 
 function wishMe() {
@@ -52,7 +82,7 @@ btn.addEventListener("click", () => {
 
 function resetApp() {
     content.innerText = ""; // Clear the displayed transcript
-    responseOutput.value = ""; // Clear the response output
+    responseOutput.innerHTML = ""; // Clear the response output
 }
 
 async function generateResponse(prompt) {
@@ -104,7 +134,7 @@ async function takeCommand(message) {
         const response = "Opening Google...";
         displayAndSpeakResponse(response);
         window.open("https://google.com/", "_blank");
-    }  else if (message.includes("search") || message.includes("look up")) {
+    } else if (message.includes("search") || message.includes("look up")) {
         const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
         if (query) {
             const response = `Searching for: ${query}`;
@@ -124,7 +154,7 @@ async function takeCommand(message) {
 }
 
 function displayAndSpeakResponse(response) {
-    responseOutput.value = response; // Update the text area with the response
+    responseOutput.innerHTML = response; // Update the text area with the response
     speak(response); // Speak the response
 }
 
