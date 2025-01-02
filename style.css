@@ -226,3 +226,17 @@ h1 {
 #response-output span.highlight {
     background-color: #ffff00; /* Yellow background for highlighting */
 }
+@keyframes zoomOut {
+    0% {
+        transform: scale(1.5);
+        color: orange;
+    }
+    100% {
+        transform: scale(1);
+        color: black;
+    }
+}
+
+.zoom-out {
+    animation: zoomOut 0.8s ease-out;
+}
