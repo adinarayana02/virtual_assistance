@@ -8,10 +8,10 @@ const MODEL = "llama3-8b-8192";
 
 function speak(text) {
     let text_speak = new SpeechSynthesisUtterance(text);
-    text_speak.rate = 0.8; // Slow speech
-    text_speak.pitch = 1; // Normal pitch
-    text_speak.volume = 1; // Full volume
-    text_speak.lang = "te-IN"; // Set language to Telugu
+    text_speak.rate = 1;
+    text_speak.pitch = 1;
+    text_speak.volume = 1;
+    text_speak.lang = "en-IN";
 
     const words = text.split(" "); // Split text into words
     let wordIndex = 0;
@@ -38,7 +38,7 @@ function stopSpeaking() {
 function highlightWord(words, index) {
     const highlightedText = words.map((word, i) => {
         if (i === index) {
-            return `<span style="background-color: yellow;">${word}</span>`;
+            return <span style="background-color: yellow;">${word}</span>;
         }
         return word;
     }).join(" ");
@@ -53,19 +53,17 @@ function wishMe() {
     let day = new Date();
     let hours = day.getHours();
     if (hours >= 0 && hours < 12) {
-        speak("శుభోదయం బాబు!");
+        speak("Good Morning Sir");
     } else if (hours >= 12 && hours < 16) {
-        speak("శుభ మధ్యాహ్నం బాబు!");
+        speak("Good Afternoon Sir");
     } else {
-        speak("శుభ సాయంత్రం బాబు!");
+        speak("Good Evening Sir");
     }
 }
 
 // Speech recognition setup
 let speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = new speechRecognition();
-
-recognition.lang = "te-IN"; // Set recognition language to Telugu
 
 recognition.onresult = (event) => {
     let currentIndex = event.resultIndex;
@@ -92,13 +90,13 @@ async function generateResponse(prompt) {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": `Bearer ${API_KEY}`,
+                "Authorization": Bearer ${API_KEY},
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
                 model: MODEL,
                 messages: [
-                    { role: "system", content: "You are a helpful and kind virtual teacher assisting Telugu primary school students. Speak clearly and slowly, and make learning fun for children." },
+                    { role: "system", content: "You are a helpful assistant." },
                     { role: "user", content: prompt },
                 ],
                 temperature: 0.7,
@@ -110,11 +108,11 @@ async function generateResponse(prompt) {
         if (data && data.choices && data.choices.length > 0) {
             return data.choices[0].message.content.trim();
         } else {
-            return "క్షమించండి, నేను మీ ప్రశ్నను సమాధానపరచలేకపోయాను.";
+            return "Sorry, I couldn't process that. Please try again.";
         }
     } catch (error) {
         console.error("Error generating response:", error);
-        return "AI సేవతో కనెక్ట్ చేయడంలో సమస్య తలెత్తింది.";
+        return "There was an error connecting to the AI service.";
     }
 }
 
@@ -122,22 +120,33 @@ async function takeCommand(message) {
     voice.style.display = "none";
     btn.style.display = "flex";
 
-    if (message.includes("నమస్కారం")) {
-        const response = "హలో బాబు! ఎలా ఉన్నావు?";
+    if (message.includes("hello") || message.includes("hey")) {
+        const response = "Hello sir, what can I help you with?";
         displayAndSpeakResponse(response);
-    } else if (message.includes("నీ పేరు ఏమిటి")) {
-        const response = "నేను మీ సహాయక ఉపాధ్యాయురాలు, తెలుగులో బోధించడానికి నేను ఇక్కడ ఉన్నాను.";
+    } else if (message.includes("who are you")) {
+        const response = "I am your virtual assistant, created by Adinarayana.";
         displayAndSpeakResponse(response);
-    } else if (message.includes("యూట్యూబ్ ఓపెన్ చేయి")) {
-        const response = "యూట్యూబ్ ఓపెన్ చేస్తున్నాను...";
+    } else if (message.includes("open youtube")) {
+        const response = "Opening YouTube...";
         displayAndSpeakResponse(response);
         window.open("https://youtube.com/", "_blank");
-    } else if (message.includes("గూగుల్ ఓపెన్ చేయి")) {
-        const response = "గూగుల్ ఓపెన్ చేస్తున్నాను...";
+    } else if (message.includes("open google")) {
+        const response = "Opening Google...";
         displayAndSpeakResponse(response);
         window.open("https://google.com/", "_blank");
+    } else if (message.includes("search") || message.includes("look up")) {
+        const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
+        if (query) {
+            const response = Searching for: ${query};
+            displayAndSpeakResponse(response);
+            const googleSearchURL = https://www.google.com/search?q=${encodeURIComponent(query)};
+            window.open(googleSearchURL, "_blank");
+        } else {
+            const response = "Please specify what you would like me to search for.";
+            displayAndSpeakResponse(response);
+        }
     } else {
-        const response = "ఇది మీకోసం...";
+        const response = "Here is answer for you...";
         displayAndSpeakResponse(response);
         const generatedResponse = await generateResponse(message);
         displayAndSpeakResponse(generatedResponse);
