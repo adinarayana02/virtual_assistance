@@ -13,10 +13,9 @@ function speak(text) {
     text_speak.volume = 1;
     text_speak.lang = "en-IN";
 
-    const words = text.split(" "); // Split text into words
+    const words = text.split(" ");
     let wordIndex = 0;
 
-    // Highlight words as they are spoken
     text_speak.onboundary = (event) => {
         if (event.name === "word") {
             highlightWord(words, wordIndex);
@@ -25,28 +24,28 @@ function speak(text) {
     };
 
     text_speak.onend = () => {
-        clearHighlight(); // Clear highlights after speech ends
+        clearHighlight();
     };
 
     window.speechSynthesis.speak(text_speak);
 }
 
 function stopSpeaking() {
-    window.speechSynthesis.cancel(); // Stop any ongoing speech synthesis
+    window.speechSynthesis.cancel();
 }
 
 function highlightWord(words, index) {
     const highlightedText = words.map((word, i) => {
         if (i === index) {
-            return <span style="background-color: yellow;">${word}</span>;
+            return `<span style="background-color: yellow;">${word}</span>`;
         }
         return word;
     }).join(" ");
-    responseOutput.innerHTML = highlightedText; // Update displayed text with highlighted word
+    responseOutput.innerHTML = highlightedText;
 }
 
 function clearHighlight() {
-    responseOutput.innerHTML = responseOutput.innerText; // Remove highlight
+    responseOutput.innerHTML = responseOutput.innerText;
 }
 
 function wishMe() {
@@ -61,7 +60,6 @@ function wishMe() {
     }
 }
 
-// Speech recognition setup
 let speechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recognition = new speechRecognition();
 
@@ -73,16 +71,16 @@ recognition.onresult = (event) => {
 };
 
 btn.addEventListener("click", () => {
-    stopSpeaking(); // Stop any ongoing speech synthesis
-    resetApp(); // Reset the application state
+    stopSpeaking();
+    resetApp();
     recognition.start();
     voice.style.display = "block";
     btn.style.display = "none";
 });
 
 function resetApp() {
-    content.innerText = ""; // Clear the displayed transcript
-    responseOutput.innerHTML = ""; // Clear the response output
+    content.innerText = "";
+    responseOutput.innerHTML = "";
 }
 
 async function generateResponse(prompt) {
@@ -90,7 +88,7 @@ async function generateResponse(prompt) {
         const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
             method: "POST",
             headers: {
-                "Authorization": Bearer ${API_KEY},
+                "Authorization": `Bearer ${API_KEY}`,
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
@@ -135,18 +133,18 @@ async function takeCommand(message) {
         displayAndSpeakResponse(response);
         window.open("https://google.com/", "_blank");
     } else if (message.includes("search") || message.includes("look up")) {
-        const query = message.replace(/search|look up|for/gi, "").trim(); // Extract search keywords
+        const query = message.replace(/search|look up|for/gi, "").trim();
         if (query) {
-            const response = Searching for: ${query};
+            const response = `Searching for: ${query}`;
             displayAndSpeakResponse(response);
-            const googleSearchURL = https://www.google.com/search?q=${encodeURIComponent(query)};
+            const googleSearchURL = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
             window.open(googleSearchURL, "_blank");
         } else {
             const response = "Please specify what you would like me to search for.";
             displayAndSpeakResponse(response);
         }
     } else {
-        const response = "Here is answer for you...";
+        const response = "Here is the answer for you...";
         displayAndSpeakResponse(response);
         const generatedResponse = await generateResponse(message);
         displayAndSpeakResponse(generatedResponse);
@@ -154,11 +152,10 @@ async function takeCommand(message) {
 }
 
 function displayAndSpeakResponse(response) {
-    responseOutput.innerHTML = response; // Update the text area with the response
-    speak(response); // Speak the response
+    responseOutput.innerHTML = response;
+    speak(response);
 }
 
-// Stop speech synthesis when the page is refreshed
 window.addEventListener("beforeunload", () => {
     stopSpeaking();
 });
