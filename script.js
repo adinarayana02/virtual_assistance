@@ -8,7 +8,7 @@ const MODEL = "llama3-8b-8192";
 
 function speak(text) {
     let text_speak = new SpeechSynthesisUtterance(text);
-    text_speak.rate = 1;
+    text_speak.rate = 0.6;
     text_speak.pitch = 1;
     text_speak.volume = 1;
     text_speak.lang = "en-IN";
@@ -52,11 +52,11 @@ function wishMe() {
     let day = new Date();
     let hours = day.getHours();
     if (hours >= 0 && hours < 12) {
-        speak("Good Morning Sir");
+        speak("Good Morning students");
     } else if (hours >= 12 && hours < 16) {
-        speak("Good Afternoon Sir");
+        speak("Good Afternoon students");
     } else {
-        speak("Good Evening Sir");
+        speak("Good Evening students");
     }
 }
 
@@ -94,11 +94,11 @@ async function generateResponse(prompt) {
             body: JSON.stringify({
                 model: MODEL,
                 messages: [
-                    { role: "system", content: "You are a helpful assistant." },
+                    { role: "system", content: "You are a compassionate and engaging virtual teacher designed to support Telugu primary school students. Use simple and clear language, speak slowly and articulately, and ensure your responses are easy to understand for young learners. Make the learning experience enjoyable by incorporating interactive, friendly, and encouraging communication. Share knowledge in a way that inspires curiosity, fosters confidence, and makes education both fun and meaningful for children." },
                     { role: "user", content: prompt },
                 ],
                 temperature: 0.7,
-                max_tokens: 150,
+                max_tokens: 300,
             }),
         });
 
