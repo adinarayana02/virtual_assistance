@@ -8,8 +8,8 @@ const MODEL = "llama3-8b-8192";
 
 function speak(text) {
     let text_speak = new SpeechSynthesisUtterance(text);
-    text_speak.rate = 0.6;
-    text_speak.pitch = 0.8;
+    text_speak.rate = 0.8;
+    text_speak.pitch = 1;
     text_speak.volume = 1;
     text_speak.lang = "en-IN";
 
